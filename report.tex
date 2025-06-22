@@ -1,0 +1,133 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage{float}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Scalability Project Report}
+\lhead{Software Performance and Scalability}
+\cfoot{\thepage}
+
+\title{Scalability Evaluation and Optimization of an IMDb Movie Search Application}
+\author{Your Name \\ MSc in Computer Science \\ Ca' Foscari University of Venice}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This report presents a comprehensive analysis of the performance and scalability of a web-based movie search application built using the IMDb dataset. The study employs closed-loop load testing with JMeter and queueing theory modeling to evaluate system performance under various load conditions. The application features a modern React frontend with Tailwind CSS and a Node.js backend, demonstrating the practical application of performance engineering principles in a real-world scenario.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+\section{Introduction}
+\begin{itemize}
+    \item \textbf{Objectives:} Evaluate and optimize the performance of a movie search application using the IMDb dataset, focusing on response times and throughput under varying user loads
+    \item \textbf{Dataset:} IMDb dataset containing movie information, ratings, and metadata
+    \item \textbf{Tools:} JMeter for load testing, JMT for queueing theory modeling, Node.js/Express backend, React frontend
+    \item \textbf{Methodology:} Combination of empirical load testing and theoretical modeling using queueing networks
+\end{itemize}
+
+\section{System Architecture}
+\subsection{Technology Stack}
+\begin{itemize}
+    \item \textbf{Frontend:} React with Tailwind CSS for styling, Vite as build tool
+    \item \textbf{Backend:} Node.js with Express.js framework
+    \item \textbf{Database:} SQLite database with IMDb dataset
+    \item \textbf{Testing:} Apache JMeter for load testing
+\end{itemize}
+
+\subsection{Application Design}
+\begin{itemize}
+    \item RESTful API design for movie search and retrieval
+    \item Single-page application architecture
+    \item Asynchronous data loading and rendering
+    \item Responsive design for various screen sizes
+\end{itemize}
+
+\subsection{Database Schema}
+\begin{itemize}
+    \item Movies table: title, year, genres, ratings
+    \item Actors table: actor information and movie associations
+    \item Directors table: director information and movie associations
+    \item Ratings table: user ratings and vote counts
+\end{itemize}
+
+\section{Query Set Generation}
+\begin{itemize}
+    \item Implementation of proportional-to-ratings sampling in \texttt{generateQuerySet.js}
+    \item Generation of 10,000 queries for comprehensive testing
+    \item Weighted random selection based on movie popularity
+    \item Query set stored in \texttt{query\_set.txt} for test reproducibility
+\end{itemize}
+
+\section{Load Testing with Closed-Loop Simulation}
+\subsection{Testing Setup}
+\begin{itemize}
+    \item \textbf{Tool:} Apache JMeter
+    \item \textbf{Test Plans:} Multiple configurations for different load scenarios
+    \item \textbf{Closed-loop Configuration:} Think time between requests
+    \item \textbf{Metrics:} Response time, throughput, error rates
+\end{itemize}
+
+\subsection{Results}
+\begin{itemize}
+    \item Analysis of throughput under various user loads
+    \item Response time distribution and percentiles
+    \item Identification of system bottlenecks
+    \item Comparison of different test configurations
+\end{itemize}
+
+\section{System Redesign and Optimization}
+\begin{itemize}
+    \item Implementation of database indexing for faster queries
+    \item Query optimization and caching strategies
+    \item Frontend performance improvements
+    \item Load balancing considerations
+\end{itemize}
+
+\section{Modeling with JMT}
+\subsection{Model Setup}
+\begin{itemize}
+    \item Queueing network model representation
+    \item Service time distributions
+    \item Arrival rate patterns
+    \item Resource utilization analysis
+\end{itemize}
+
+\subsection{Results and Analysis}
+\begin{itemize}
+    \item Comparison of model predictions with actual measurements
+    \item Identification of saturation points
+    \item Recommendations for optimal system configuration
+    \item Scalability limits and bottlenecks
+\end{itemize}
+
+\section{Conclusions}
+\begin{itemize}
+    \item Summary of key performance findings
+    \item Validation of modeling approach
+    \item Practical recommendations for production deployment
+    \item Future improvements and scalability considerations
+\end{itemize}
+
+\appendix
+\section{Appendix}
+\begin{itemize}
+    \item JMeter test plan configurations
+    \item Query generation algorithm details
+    \item Performance test results and graphs
+    \item JMT model parameters and configurations
+\end{itemize}
+
+\end{document} 

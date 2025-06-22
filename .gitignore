@@ -1,0 +1,14 @@
+# Local data folders
+Data/
+Database/
+
+# Node.js
+node_modules/
+.env
+.env*.local
+*.log
+
+# Build output
+/dist
+/build
+/out

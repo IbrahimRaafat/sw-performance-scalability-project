@@ -1,0 +1,3 @@
+Label,# Samples,Average,Median,90% Line,95% Line,99% Line,Min,Max,Error %,Throughput,Received KB/sec,Sent KB/sec
+Search Movie API,44671,2632,2179,5111,5728,8984,5,24854,0.074%,1.66982,1.35,0.25
+TOTAL,44671,2632,2179,5111,5728,8984,5,24854,0.074%,1.66982,1.35,0.25
