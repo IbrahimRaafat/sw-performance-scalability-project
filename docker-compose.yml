@@ -2,49 +2,23 @@ services:
   mongo1:
     image: mongo:latest
     container_name: mongo1
-    command: ["--replSet", "rs0", "--bind_ip_all"]
     volumes:
-      - ./Database/Data1:/data/db
+      - ./Database/Data:/data/db
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password123
     ports:
       - "27017:27017"
-
-  mongo2:
-    image: mongo:latest
-    container_name: mongo2
-    command: ["--replSet", "rs0", "--bind_ip_all"]
-    volumes:
-      - ./Database/Data2:/data/db
-    ports:
-      - "27018:27017"
-
-  mongo3:
-    image: mongo:latest
-    container_name: mongo3
-    command: ["--replSet", "rs0", "--bind_ip_all"]
-    volumes:
-      - ./Database/Data3:/data/db
-    ports:
-      - "27019:27017"
-
-  mongo-setup:
-    image: mongo:latest
-    depends_on:
-      - mongo1
-      - mongo2
-      - mongo3
-    volumes:
-      - ./scripts:/scripts
-    entrypoint: ["bash", "/scripts/init-mongo.sh"]
-    restart: "no"
 
   backend:
     build: ./Backend
     ports:
       - "5000:5000"
     environment:
-      - MONGO_URI=mongodb://admin:password123@mongo1:27017,mongo2:27017,mongo3:27017/IMDB?replicaSet=rs0&authSource=admin
+      - MONGO_URI=mongodb://admin:password123@mongo1:27017/IMDB?authSource=admin
     depends_on:
-      - mongo-setup
+      - mongo1
 
   frontend:
     build: ./frontend
